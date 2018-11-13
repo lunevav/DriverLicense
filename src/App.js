@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Provider } from 'react-redux'
-import store from './store'
+// import { Provider } from 'react-redux'
+// import store from './store'
 
 // @USER COMPONENTS
 import Header from './components/Header'
 import Form from './components/Form'
 import CardFront from './components/CardFront'
 import CardBack from './components/CardBack'
-import TestComponent from './components/TestComponent'
 
 
 
@@ -21,29 +20,29 @@ class App extends Component {
       date: '',
       category: '',
       switcher: false,
-      fontColor: ''
+      fontColor: '',
+      cardColor: '',
+      radius: '',
+      cardSwitcher: true
     }
   }
 
-  updateCard(Name, Date, Category){
+  updateCard(name, date, category){
     this.setState({
-      name: Name,
-      date: Date,
-      category: Category,
+      name,
+      date,
+      category,
       switcher: !this.state.switcher
     });
-    console.log(this.state);
   };
 
-  changeFontColor(fontColor){
-    this.setState({
-      fontColor: fontColor
-    });
-  }
+  changeFontColor = (fontColor) => this.setState({fontColor});
+  changeCardColor = (cardColor) => this.setState({cardColor});
+  changeRadius = (radius) => this.setState({radius});
 
   render() {
     console.log('[App][Render]');
-    const { name, date, category, switcher, fontColor } = this.state;
+    const { name, date, category, switcher, fontColor, cardColor, radius } = this.state;
     return (
         <div>
           <Header/>
@@ -58,11 +57,17 @@ class App extends Component {
               category={category}
               switcher={switcher}
               fontColor={fontColor}
+              cardColor={cardColor}
+              radius={radius}
             />
             <CardBack
               switcher={switcher}
               fontColor={fontColor}
+              cardColor={cardColor}
+              radius={radius}
               changeFontColor={this.changeFontColor.bind(this)}
+              changeCardColor={this.changeCardColor.bind(this)}
+              changeRadius={this.changeRadius.bind(this)}
             />
           </div>
         </div>

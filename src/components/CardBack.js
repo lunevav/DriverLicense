@@ -1,20 +1,9 @@
 import React, {Component} from 'react';
 
 class CardBack extends Component {
-  constructor(){
-    super();
-
-    this.state = {
-      fontColor: ''
-    }
-  }
-
-  onChange = (e) => {
-    this.setState({
-      fontColor: e.target.value
-    })
-    this.props.changeFontColor(this.state.fontColor);
-  }
+  onChangeFontColor = (e) => this.props.changeFontColor(e.target.value);
+  onChangeCardColor = (e) => this.props.changeCardColor(e.target.value);
+  onChangeRadius = (e) => this.props.changeRadius(e.target.value);
 
   render() {
     console.log('[Card][Render]');
@@ -22,8 +11,11 @@ class CardBack extends Component {
       <div className="row justify-content-center"
            style={!this.props.switcher ? {display: 'none'} : {display: 'flex'}}>
         <div className="col-xl-7 col-lg-8 col-md-9 col-sm-10 p-0">
-          <div className="card m-3"
-               style={{color: this.props.fontColor}}
+          <div className="card m-3 div-shadow"
+               style={{color: this.props.fontColor,
+                 background: this.props.cardColor,
+                 borderRadius: this.props.radius+'px',
+                 overflow: 'hidden'}}
           >
             <div className="card-body container shadow p-0">
               <div className="row"
@@ -36,6 +28,7 @@ class CardBack extends Component {
                     <input className="form-control"
                            placeholder="Enter card color hex code..."
                            type='text'
+                           onChange={this.onChangeCardColor}
                     />
                   </div>
                   <div className="form-group">
@@ -43,7 +36,7 @@ class CardBack extends Component {
                     <input className="form-control"
                            placeholder="Enter font color hex code..."
                            type='text'
-                           onChange={this.onChange}
+                           onChange={this.onChangeFontColor}
                     />
                   </div>
                   <div className="form-group">
@@ -51,6 +44,7 @@ class CardBack extends Component {
                     <input className="form-control"
                            placeholder="Enter radius..."
                            type='text'
+                           onChange={this.onChangeRadius}
                     />
                   </div>
                 </div>

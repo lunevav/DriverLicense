@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
 
 class CardFront extends Component {
+
+
   render() {
     console.log('[Card][Render]');
     return (
       <div className="row justify-content-center"
            style={!this.props.switcher ? {display: 'none'} : {display: 'flex'}}>
         <div className="col-xl-7 col-lg-8 col-md-9 col-sm-10 p-0">
-          <div className="card m-3">
+          <div className="card m-3 div-shadow"
+               style={{color: this.props.fontColor, background: this.props.cardColor}}
+          >
             <div className="card-body container shadow p-0">
               <div className="row"
-                   style={{height:'340px', color: this.props.fontColor}}
+                   style={{height:'340px'}}
               >
                 <div className="col pt-3 pl-4 border-right">
                   <h5 className="mb-4">Your Driver License</h5>

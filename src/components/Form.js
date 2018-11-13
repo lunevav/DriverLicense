@@ -22,19 +22,21 @@ class Form extends Component {
   }
 
   onChange = (e) =>{
-    if (e.target.type == "checkbox" && this.state.category.indexOf(e.target.value) == -1){
+    const { type, value, name } = e.target;
+    const { category} = this.state;
+     if (type === "checkbox" && category.indexOf(value) === -1){
       this.setState({
-        category: this.state.category + e.target.value
+        category: category + value
       })
     }
-    if (e.target.type == "checkbox" && this.state.category.indexOf(e.target.value) > -1){
+    if (type === "checkbox" && category.indexOf(value) > -1){
       this.setState({
-        category: this.state.category.replace(e.target.value, '')
+        category: category.replace(value, '')
       })
     }
-    if (e.target.type !== "checkbox"){
+    if (type !== "checkbox"){
       this.setState({
-        [e.target.name]: e.target.value
+        [name]: value
       })
     }
   }
@@ -59,6 +61,7 @@ class Form extends Component {
                          type='text'
                          onChange={this.onChange}
                          value={this.state.name}
+                         title="20 letters max"
                   />
                 </div>
                 <div className="form-group">
