@@ -1,3 +1,7 @@
+Data from Driver License Form stored in component state.
+No redux ):
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
