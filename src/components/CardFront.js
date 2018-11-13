@@ -10,7 +10,7 @@ class CardFront extends Component {
           <div className="card m-3">
             <div className="card-body container shadow p-0">
               <div className="row"
-                   style={{height:'340px'}}
+                   style={{height:'340px', color: this.props.fontColor}}
               >
                 <div className="col pt-3 pl-4 border-right">
                   <h5 className="mb-4">Your Driver License</h5>

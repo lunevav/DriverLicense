@@ -20,7 +20,8 @@ class App extends Component {
       name: '',
       date: '',
       category: '',
-      switcher: false
+      switcher: false,
+      fontColor: ''
     }
   }
 
@@ -34,9 +35,15 @@ class App extends Component {
     console.log(this.state);
   };
 
+  changeFontColor(fontColor){
+    this.setState({
+      fontColor: fontColor
+    });
+  }
+
   render() {
     console.log('[App][Render]');
-    const { name, date, category, switcher } = this.state;
+    const { name, date, category, switcher, fontColor } = this.state;
     return (
         <div>
           <Header/>
@@ -50,9 +57,12 @@ class App extends Component {
               date={date}
               category={category}
               switcher={switcher}
+              fontColor={fontColor}
             />
             <CardBack
               switcher={switcher}
+              fontColor={fontColor}
+              changeFontColor={this.changeFontColor.bind(this)}
             />
           </div>
         </div>

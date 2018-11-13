@@ -1,13 +1,30 @@
 import React, {Component} from 'react';
 
 class CardBack extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      fontColor: ''
+    }
+  }
+
+  onChange = (e) => {
+    this.setState({
+      fontColor: e.target.value
+    })
+    this.props.changeFontColor(this.state.fontColor);
+  }
+
   render() {
     console.log('[Card][Render]');
     return (
       <div className="row justify-content-center"
            style={!this.props.switcher ? {display: 'none'} : {display: 'flex'}}>
         <div className="col-xl-7 col-lg-8 col-md-9 col-sm-10 p-0">
-          <div className="card m-3">
+          <div className="card m-3"
+               style={{color: this.props.fontColor}}
+          >
             <div className="card-body container shadow p-0">
               <div className="row"
                    style={{height:'340px'}}
@@ -26,6 +43,7 @@ class CardBack extends Component {
                     <input className="form-control"
                            placeholder="Enter font color hex code..."
                            type='text'
+                           onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">

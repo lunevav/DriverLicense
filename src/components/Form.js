@@ -13,10 +13,6 @@ class Form extends Component {
   submitForm(e){
     e.preventDefault();
     const { name, date, category } = this.state;
-
-
-
-    console.log(this.state);
     this.props.submitFormHandler(name, date, category);
     this.setState({
       name: '',
