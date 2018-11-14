@@ -5,8 +5,13 @@
 
 .div-shadow{
     transition: .3s;
+    overflow: hidden;
 }
 
 .div-shadow:hover{
     box-shadow: 2px 4px 10px 4px grey;
+}
+
+.card-height{
+    height: 340px;
 }

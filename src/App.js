@@ -9,6 +9,7 @@ import Header from './components/Header'
 import Form from './components/Form'
 import CardFront from './components/CardFront'
 import CardBack from './components/CardBack'
+import CardToggler from './components/CardToggler'
 
 
 
@@ -19,11 +20,11 @@ class App extends Component {
       name: '',
       date: '',
       category: '',
-      switcher: false,
+      switcher: false, // switch form to card after submit
       fontColor: '',
       cardColor: '',
       radius: '',
-      cardSwitcher: true
+      cardToggler: true // toggle card front and back sides
     }
   }
 
@@ -39,10 +40,11 @@ class App extends Component {
   changeFontColor = (fontColor) => this.setState({fontColor});
   changeCardColor = (cardColor) => this.setState({cardColor});
   changeRadius = (radius) => this.setState({radius});
+  toggleCard = () => this.setState({cardToggler: !this.state.cardToggler})
 
   render() {
     console.log('[App][Render]');
-    const { name, date, category, switcher, fontColor, cardColor, radius } = this.state;
+    const { name, date, category, switcher, fontColor, cardColor, radius, cardToggler } = this.state;
     return (
         <div>
           <Header/>
@@ -50,6 +52,10 @@ class App extends Component {
             <Form
               switcher={switcher}
               submitFormHandler={this.updateCard.bind(this)}
+            />
+            <CardToggler
+              switcher={switcher}
+              toggleCard={this.toggleCard.bind(this)}
             />
             <CardFront
               name={name}
@@ -59,12 +65,14 @@ class App extends Component {
               fontColor={fontColor}
               cardColor={cardColor}
               radius={radius}
+              cardToggler={cardToggler}
             />
             <CardBack
               switcher={switcher}
               fontColor={fontColor}
               cardColor={cardColor}
               radius={radius}
+              cardToggler={cardToggler}
               changeFontColor={this.changeFontColor.bind(this)}
               changeCardColor={this.changeCardColor.bind(this)}
               changeRadius={this.changeRadius.bind(this)}

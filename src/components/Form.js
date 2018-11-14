@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import validateForm from '../tools/formValidation'
 
 class Form extends Component {
   constructor() {
@@ -7,11 +9,19 @@ class Form extends Component {
       name: '',
       date: '',
       category: '',
+      formValid: false
     }
   }
 
   submitForm(e){
     e.preventDefault();
+
+    //localhost:8090 POST request
+    axios.post(`http://localhost:8090/driver-card/`, this.state).then(res => {
+      if (res.status !== 200) console.log('PROBLEM:' + res.statusText);
+    });
+
+    //send info to the Card
     const { name, date, category } = this.state;
     this.props.submitFormHandler(name, date, category);
     this.setState({
@@ -23,7 +33,7 @@ class Form extends Component {
 
   onChange = (e) =>{
     const { type, value, name } = e.target;
-    const { category} = this.state;
+    const { category } = this.state;
      if (type === "checkbox" && category.indexOf(value) === -1){
       this.setState({
         category: category + value
@@ -39,7 +49,11 @@ class Form extends Component {
         [name]: value
       })
     }
-  }
+
+    this.setState({
+      formValid: validateForm(this.state.name, this.state.date, this.state.category)
+    })
+  };
 
   render() {
     console.log('[FormFront][Render]');
@@ -119,6 +133,7 @@ class Form extends Component {
                 <input type="submit"
                        value="Send"
                        className="btn btn-primary"
+                       disabled={this.state.formValid ? "" : "disabled"}
                 />
               </form>
             </div>
