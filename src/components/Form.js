@@ -19,7 +19,7 @@ class Form extends Component {
     //localhost:8090 POST request
     axios.post(`http://localhost:8090/driver-card/`, this.state).then(res => {
       if (res.status !== 200) console.log('PROBLEM:' + res.statusText);
-    });
+    }).catch(error => console.log(error));
 
     //send info to the Card
     const { name, date, category } = this.state;
@@ -49,11 +49,20 @@ class Form extends Component {
         [name]: value
       })
     }
-
-    this.setState({
-      formValid: validateForm(this.state.name, this.state.date, this.state.category)
-    })
   };
+
+
+  componentDidUpdate(prevProps, prevState) {
+
+      let a = validateForm(this.state.name, this.state.date, this.state.category);
+      if ((!prevState.formValid && a) || (prevState.formValid && !a)) {
+        this.setState({
+          formValid: a
+        })
+      }
+  }
+
+
 
   render() {
     console.log('[FormFront][Render]');
